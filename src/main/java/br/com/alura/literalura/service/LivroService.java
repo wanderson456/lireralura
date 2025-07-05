@@ -54,7 +54,7 @@ public class LivroService {
         Livro livro = new Livro();
         livro.setTitulo(dto.getTitle());
         livro.setIdioma(dto.getLanguages().isEmpty() ? "desconhecido" : dto.getLanguages().get(0));
-        livro.setdownload_count(dto.getDownloadCount());
+        livro.setDownloadCount(dto.getDownloadCount());
         livro.setAutor(autor);
 
         return livroRepository.save(livro);

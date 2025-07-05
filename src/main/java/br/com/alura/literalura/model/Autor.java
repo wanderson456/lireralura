@@ -3,6 +3,7 @@ package br.com.alura.literalura.model;
 import jakarta.persistence.*;
 
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -19,6 +20,9 @@ public class Autor {
     private Integer anoNascimento;
 
     private Integer anoFalecimento;
+    @OneToMany(mappedBy = "autor", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+
+    private List<Livro> livros;
 
     public Autor() {}
 
@@ -39,6 +43,9 @@ public class Autor {
 
     public Integer getAnoFalecimento() { return anoFalecimento; }
     public void setAnoFalecimento(Integer anoFalecimento) { this.anoFalecimento = anoFalecimento; }
+    public List<Livro> getLivros() {
+        return livros;
+    }
 
     @Override
     public boolean equals(Object o) {

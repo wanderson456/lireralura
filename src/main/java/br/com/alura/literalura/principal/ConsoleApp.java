@@ -61,9 +61,22 @@ public class ConsoleApp implements CommandLineRunner {
                     if (autores.isEmpty()) {
                         System.out.println("Nenhum autor registrado.");
                     } else {
-                        autores.forEach(System.out::println);
+                        autores.forEach(autor -> {
+                            System.out.println("\n👤 Autor: " + autor.getNome());
+                            System.out.println("🎂 Ano de nascimento: " + autor.getAnoNascimento());
+                            System.out.println("🪦 Ano de falecimento: " +
+                                    (autor.getAnoFalecimento() != null ? autor.getAnoFalecimento() : "Vivo ou desconhecido"));
+                            System.out.println("📚 Livros:");
+                            if (autor.getLivros() == null || autor.getLivros().isEmpty()) {
+                                System.out.println("  - Nenhum livro registrado para este autor.");
+                            } else {
+                                autor.getLivros().forEach(livro -> System.out.println("  - " + livro.getTitulo()));
+                            }
+                            System.out.println("---------------------------");
+                        });
                     }
                     break;
+
 
                 case 4:
                     System.out.print("Digite o ano para listar autores vivos: ");
@@ -84,8 +97,14 @@ public class ConsoleApp implements CommandLineRunner {
                     System.out.print("Digite o idioma (pt, en, es, fr): ");
 
                     String idioma = scanner.nextLine().toLowerCase();
-                     //long quantidade = livroService.buscarPorIdioma(idioma);
-                    //ystem.out.println("Quantidade de livros no idioma '" + idioma + "': " + quantidade);
+                     List<Livro> livrosnoidioma =  livroService.buscarPorIdioma(idioma);
+                     if (!livrosnoidioma.isEmpty()){
+                         livrosnoidioma.forEach(System.out::println);
+                     }else {
+                         System.out.println(" nao a livros desse idioma no banco ");
+                     }
+
+
                     break;
 
                 case 0:
@@ -105,7 +124,7 @@ public class ConsoleApp implements CommandLineRunner {
         System.out.println("2 - Listar livros registrados");
         System.out.println("3 - Listar autores registrados");
         System.out.println("4 - Listar autores vivos em um ano");
-        System.out.println("5 - Listar quantidade de livros por idioma (pt, en, es, fr)");
+        System.out.println("5 - Listar  de livros por idioma (pt, en, es, fr)");
         System.out.println("0 - Sair");
         System.out.print("Escolha: ");
     }

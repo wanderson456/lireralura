@@ -13,18 +13,19 @@ public class Livro {
 
     private String titulo;
     private String idioma;
-    private Integer download_count;
+    private Integer downloadCount;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "autor_id", nullable = false)
     private Autor autor;
+
 
     public Livro() {}
 
     public Livro(String titulo, String idioma, Integer download_count, Autor autor) {
         this.titulo = titulo;
         this.idioma = idioma;
-        this.download_count = download_count;
+        this.downloadCount = download_count;
         this.autor = autor;
     }
 
@@ -37,8 +38,12 @@ public class Livro {
     public String getIdioma() { return idioma; }
     public void setIdioma(String idioma) { this.idioma = idioma; }
 
-    public Integer getdownload_count() { return download_count; }
-    public void setdownload_count(Integer download_count) { this.download_count = download_count; }
+    public Integer getDownloadCount() {
+        return downloadCount;
+    }
+
+    public void setDownloadCount(Integer downloadCount) {
+        this.downloadCount = downloadCount;}
 
     public Autor getAutor() { return autor; }
     public void setAutor(Autor autor) { this.autor = autor; }
@@ -60,7 +65,7 @@ public class Livro {
     public String toString() {
         return "📘 Título: " + titulo +
                 "\n🌐 Idioma: " + idioma +
-                "\n⬇️ Downloads: " + download_count +
+                "\n⬇️ Downloads: " + downloadCount +
                 "\n" + autor +
                 "\n--------------------------";
     }
